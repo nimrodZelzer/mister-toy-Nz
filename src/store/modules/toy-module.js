@@ -1,8 +1,7 @@
-import { toyService } from "./services/toy-service.js"
+import { toyService } from "../../js/services/toy-service.js"
 
 
-export const store = new Vuex.Store({
-    strict: true,
+export default {
     state() {
         return {
             toys: [],
@@ -21,6 +20,7 @@ export const store = new Vuex.Store({
         removeToy(state, { toyId }) {
             const idx = state.toys.findIndex(t => t._id === toyId)
             state.lastRemovedToy = state.toys[idx]
+            console.log("here")
             state.toys.splice(idx, 1)
         },
         addToy(state, { toy }) {
@@ -45,17 +45,17 @@ export const store = new Vuex.Store({
                     commit({ type: 'setToys', toys })
                 })
         },
-        removeToys({ commit }, payload) {
+        removeToy({ commit }, payload) {
             return toyService.remove(payload.toyId)
                 .then(() => {
-                    commit({ type: 'clearRemoveToy' })
+                    commit({ type: 'removeToy' })
                 })
                 .catch((err) => {
                     commit({ type: 'undoRemoveToy' })
                     throw err
                 })
         },
-        saveProduct({ commit }, { toy }) {
+        saveToy({ commit }, { toy }) {
             const actionType = (toy._id) ? 'updateToy' : 'addToy'
             return toyService.save(toy)
                 .then((savedToy) => {
@@ -64,4 +64,4 @@ export const store = new Vuex.Store({
                 })
         },
     },
-})
+}

@@ -1,5 +1,5 @@
 // 
-export const asyncStorageService = {
+export const storageService = {
     query,
     get,
     post,
@@ -7,10 +7,10 @@ export const asyncStorageService = {
     remove,
 }
 
-function query(entityType, delay=1000) {
+function query(entityType, delay = 1000) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
-    return new Promise((resolve)=>{
-        setTimeout(()=>{
+    return new Promise((resolve) => {
+        setTimeout(() => {
             resolve(entities)
         }, delay)
     })
