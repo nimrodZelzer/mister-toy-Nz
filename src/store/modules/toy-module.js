@@ -20,7 +20,6 @@ export default {
         removeToy(state, { toyId }) {
             const idx = state.toys.findIndex(t => t._id === toyId)
             state.lastRemovedToy = state.toys[idx]
-            console.log("here")
             state.toys.splice(idx, 1)
         },
         addToy(state, { toy }) {
@@ -28,6 +27,7 @@ export default {
         },
         updateToy(state, { toy }) {
             const idx = state.toys.findIndex(t => t._id === toy._id)
+            console.log("updating")
             state.toys.splice(idx, 1, toy)
         },
         clearRemoveToy(state) {
@@ -56,11 +56,11 @@ export default {
                 })
         },
         saveToy({ commit }, { toy }) {
+            console.log("toy id", toy._id)
             const actionType = (toy._id) ? 'updateToy' : 'addToy'
             return toyService.save(toy)
                 .then((savedToy) => {
                     commit({ type: actionType, toy: savedToy })
-                    return savedToy
                 })
         },
     },

@@ -1,7 +1,9 @@
 
 <template>
-    <h2>this is the toy store</h2>
-    <toy-list @removeToy="removeToy" v-if="toys" :toys="toysToShow" />
+  <h2>this is the toy store</h2>
+  <button @click="goToEdit" >Add a new Toy</button>
+  <toy-list @removeToy="removeToy" v-if="toys" :toys="toysToShow" />
+
 </template>
 
 <script>
@@ -20,18 +22,21 @@ export default {
       return this.$store.getters.toys
     },
     toysToShow() {
-       return this.toys
-    //   const regex = new RegExp(this.filterBy.vendor, 'i')
-    //   return this.cars.filter((car) => regex.test(car.vendor))
+      return this.toys
+      //   const regex = new RegExp(this.filterBy.vendor, 'i')
+      //   return this.cars.filter((car) => regex.test(car.vendor))
     },
   },
-  created() {},
+  created() { },
   methods: {
     loadToys() {
       toyService.query().then((toys) => (this.toys = toys))
     },
     setFilter(filterBy) {
       this.filterBy = filterBy
+    },
+    goToEdit() {
+      this.$router.push(`/toy/edit`)
     },
     removeToy(toyId) {
       this.$store.dispatch({ type: 'removeToy', toyId })

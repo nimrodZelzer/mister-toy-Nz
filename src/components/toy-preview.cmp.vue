@@ -3,7 +3,7 @@
         <p>Toy name: {{ toy.name }}</p>
         <div>Price: {{ toy.price }}</div>
         <div>InStock: {{ toy.inStock }}</div>
-        <button @click="onRemove(toy._id)">Remove</button>
+        <button @click="onRemove">Remove</button>
         <button>Edit</button>
     </article>`,
 </template>

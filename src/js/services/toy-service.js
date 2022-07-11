@@ -30,6 +30,7 @@ function remove(id) {
 
 function save(toy) {
     const savedToy = (toy._id) ? storageService.put(KEY, toy) : storageService.post(KEY, toy)
+    console.log("toy id in service", toy._id)
     return savedToy
 }
 
