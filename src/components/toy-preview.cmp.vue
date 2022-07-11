@@ -4,7 +4,7 @@
         <div>Price: {{ toy.price }}</div>
         <div>InStock: {{ toy.inStock }}</div>
         <button @click="onRemove">Remove</button>
-        <button>Edit</button>
+        <button @click="goToEdit">Edit</button>
     </article>`,
 </template>
 <script>
@@ -16,6 +16,9 @@ export default {
     methods: {
         onRemove() {
             this.$emit('removeToy', this.toy._id)
+        },
+         goToEdit() {
+            this.$router.push(`/toy/edit/${this.toy._id}`)
         },
     },
     computed: {

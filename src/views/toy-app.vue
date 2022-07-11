@@ -1,7 +1,8 @@
 
 <template>
   <h2>this is the toy store</h2>
-  <button @click="goToEdit" >Add a new Toy</button>
+  <button @click="goToEdit">Add a new Toy</button>
+  <toy-filter @setFilter="setFilter" />
   <toy-list @removeToy="removeToy" v-if="toys" :toys="toysToShow" />
 
 </template>
@@ -22,9 +23,9 @@ export default {
       return this.$store.getters.toys
     },
     toysToShow() {
-      return this.toys
-      //   const regex = new RegExp(this.filterBy.vendor, 'i')
-      //   return this.cars.filter((car) => regex.test(car.vendor))
+       if (!this.filterBy) return this.toys
+      const regex = new RegExp(this.filterBy.name, 'i')
+      return this.toys.filter((toy) => regex.test(toy.name))
     },
   },
   created() { },
