@@ -1,5 +1,5 @@
 <template>
-    <h2>this is a home page</h2>
+    <h2>this is the toy store</h2>
 </template>
 <script>
 export default {
